@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 const useForm = (initialFieldValues,setCurrentId) => {
 
@@ -14,7 +14,8 @@ const useForm = (initialFieldValues,setCurrentId) => {
     }
 
     const resetForm =() =>{
-        setValues(initialFieldValues)
+        //setValues(initialFieldValues)
+        values.message = ''
         setErrors({})
         setCurrentId(0)
     }

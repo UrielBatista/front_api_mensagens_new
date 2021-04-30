@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { withStyles } from "@material-ui/core";
 import { Button } from "react-bootstrap";
 import useForm from "./useForm";
@@ -21,7 +21,7 @@ const styles = theme => ({
         '& .MuiTextField-root': {
             margin: theme.spacing(2),
         },
-      
+
     },
     form: {
         width: '50h',
@@ -29,26 +29,33 @@ const styles = theme => ({
         flexWrap: 'wrap',
         justifyContent: 'center',
         // marginLeft: '-9.3ch '
-        
+
     },
     postBtn: {
         width: "100%",
         flexWrap: 'wrap',
         justifyContent: 'center'
-        
+
     }
 })
 
 const PostMessageForm = ({ classes, ...props }) => {
 
     useEffect(() => {
-        if (props.currentId != 0){
+        if (props.currentId !== 0) {
             setValues({
-                ...props.postMessageList.find(x => x._id == props.currentId)
+                ...props.postMessageList.find(x => x._id === props.currentId)
             })
             setErrors({})
+            
         }
+
     }, [props.currentId])
+
+    function scroll(){
+        let x = document.getElementsByClassName('MuiPaper-root lista-messages MuiPaper-elevation1 MuiPaper-rounded')[0];
+        x.scrollTo(1, 10000000)
+    }
 
     const validate = () => {
         let temp = { ...errors }
@@ -57,7 +64,7 @@ const PostMessageForm = ({ classes, ...props }) => {
         setErrors({
             ...temp
         })
-        return Object.values(temp).every(x => x == "")
+        return Object.values(temp).every(x => x === "")
     }
 
     var {
@@ -67,7 +74,7 @@ const PostMessageForm = ({ classes, ...props }) => {
         setErrors,
         handleInputChange,
         resetForm
-    } = useForm(initialFieldValues,props.setCurrentId)
+    } = useForm(initialFieldValues, props.setCurrentId)
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -80,50 +87,53 @@ const PostMessageForm = ({ classes, ...props }) => {
                 />
             })
             resetForm()
+            scroll()
         }
         if (validate()) {
-            if (props.currentId == 0)
+            console.log(props.currentId)
+            if (props.currentId === 0)
                 props.createPostMessage(values, onSuccess)
             else
                 props.updatePostMessage(props.currentId, values, onSuccess)
         }
     }
-    
+
     return (
-        
-        <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`}
+        // className={`${classes.root} ${classes.form}`}
+        <form autoComplete="off" noValidate className="forms_styles"
             onSubmit={handleSubmit}>
-                <TextField 
-                    name="title"
-                    variant="outlined"
-                    label="Nome"
-                    fullWidth
-                    value={values.title}
-                    onChange={handleInputChange}
-                    {...(errors.title && { error: true, helperText: errors.title })}
-                />
-                
-                <TextField
-                    name="message"
-                    variant="outlined"
-                    label="Mensagem"
-                    fullWidth
-                    multiline
-                    rows={4}
-                    value={values.message}
-                    onChange={handleInputChange}
-                    {...(errors.message && { error: true, helperText: errors.message })}
-                />
-                <p/>
-                <Button
-                    variant="dark"
-                    color="secondary"
-                    size="large"
-                    type="submit"
-                    className={classes.postBtn}
-                >Enviar</Button>
+            <TextField
+                name="title"
+                variant="outlined"
+                label="Nome"
+                fullWidth
+                value={values.title}
+                onChange={handleInputChange}
+                style={{marginBottom: '25px'}}
+                {...(errors.title && { error: true, helperText: errors.title })}
+            />
+
+            <TextField
+                name="message"
+                variant="outlined"
+                label="Mensagem"
+                fullWidth
+                multiline
+                rows={4}
+                value={values.message}
+                onChange={handleInputChange}
+                {...(errors.message && { error: true, helperText: errors.message })}
+            />
+            <p />
+            <Button
+                variant="dark"
+                color="secondary"
+                size="large"
+                type="submit"
+                className={classes.postBtn}
+            >Enviar</Button>
         </form>
-        
+
     );
 }
 
@@ -137,4 +147,3 @@ const mapActionToProps = {
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(PostMessageForm));
-// withStyles(styles)

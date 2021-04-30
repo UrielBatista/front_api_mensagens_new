@@ -8,24 +8,32 @@ export const ACTION_TYPES = {
 }
 //buscando dados
 export const fetchAll = () => dispatch => {
+    function scroll(){
+        let x = document.getElementsByClassName('MuiPaper-root lista-messages MuiPaper-elevation1 MuiPaper-rounded')[0];
+        x.scrollTo(1, 10000000)
+    }
     api.postMessage().fetchAll()
         .then(res => {
             dispatch({
                 type: ACTION_TYPES.FETCH_ALL,
                 payload: res.data
             })
+            scroll()
+            
         })
         .catch(err => console.log(err))
 
 }
 //inserindo dados
 export const create = (data, onSuccess) => dispatch => {
+    
     api.postMessage().create(data)
         .then(res =>{
             dispatch({
                 type: ACTION_TYPES.CREATE,
                 payload: res.data
             })
+           
             onSuccess()
         })
         .catch(err => console.log(err))

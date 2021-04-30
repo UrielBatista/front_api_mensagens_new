@@ -16,8 +16,8 @@ function App() {
       <AppBar position="static">
         <div className="TituloApp">
           <h1 className="msgOdio">
-            Mensagens de 
-                Ódio
+            Chat realtime - v1.0
+                  Web
           </h1>
         </div>
       </AppBar>

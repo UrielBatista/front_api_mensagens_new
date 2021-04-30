@@ -1,5 +1,78 @@
-.Refresh {
-    width: 100%;
-    margin-top: -150%;
-    margin-left: 620%;
+.lista-messages{
+    margin-top: 25px;
+    margin-left: 1.9%;
+    width: 96%;
+    height: 310px;
+    overflow: auto;
+    overflow: scroll;
+    
 }
+::-webkit-scrollbar{
+    width: 12px;
+}
+::-webkit-scrollbar-thumb{
+    background: #282c34;
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: black;
+    border-radius: 6px;
+}
+
+@media (max-width: 400px){
+    .forms_styles {
+        width: 300%;
+        margin-left: -60px;
+    }
+    
+}
+
+@media (max-width: 328px) {
+    .forms_styles {
+        margin-left: -69px;
+    }
+}
+
+@media (max-width: 375px) {
+    .forms_styles {
+        margin-left: -50px;
+    }
+    .lista-messages{
+        margin-top: 25px;
+        margin-left: 6.8%;
+        width: 85%;
+        height: 310px;
+        overflow: auto;
+        overflow: scroll;
+        
+    }
+}
+
+@media (max-width: 320px) {
+    .forms_styles {
+        width: 300%;
+        margin-left: -30px;
+        
+    }
+}
+
+@media (max-width: 396px) {
+    .forms_styles {
+        width: 185%
+    }
+}
+
+@media (max-width: 364px) {
+    .forms_styles {
+        width: 215%
+    }
+
+    .grid-metodo {
+        margin-left: -50px;
+        margin-right: -60px;
+    }
+}
+
+
+
+
